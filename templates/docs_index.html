@@ -1,0 +1,57 @@
+<div class="startpage">
+  <{$langbar}>
+
+  <table class="mt">
+    <tr class="header">
+      <td>Doc #</td>
+      <td>Online Document</td>
+      <td>Status</td>
+      <td>Downloadable Documents</td>
+    </tr>
+    <{foreach key=docnum item=doc from=$doclist}>
+     <tr class="mt">
+       <td>
+         <b><{$docnum|upper}></b>
+       </td>
+
+       <td>
+         <a href="index.php?doc=<{$docnum}>&amp;lang=<{$doc.lang}>"><{$doc.title}></a><br>
+         <{if $doc.version}>
+           <span class="version"> <{$doc.version}> : <{$doc.date}> </span>
+         <{/if}>
+         (<{$doc.online.hits}> <{$textlist.ohits}>)
+         <br>
+         <{foreach key=index item=language from=$doc.langlist}>
+           <a href="index.php?doc=<{$docnum}>&amp;lang=<{$language}>"><img class="flags" src="images/flags/<{$language}>.png"></a>
+         <{/foreach}>
+       </td>
+
+       <td width="104px">
+         <{if $doc.status}>
+           <img class="progress" src="images/progress/<{$doc.lang}>_<{$docnum}>.png">
+         <{/if}>
+       </td>
+
+       <td>
+         <table>
+           <{foreach key=type item=desc from=$doctypes}>
+            <{if $doc.$type}>
+            <tr>
+              <td width="70%">
+                <a href="download.php?doc=<{$docnum}>&amp;lang=<{$doc.lang}>&amp;doctype=<{$type}>"><{$desc.desc}></a><br>
+              </td>
+              <td class="hits">
+                (<{$doc.$type.hits}> <{$textlist.downloads}>)
+              </td>
+              <td class="file_size">
+                <{$doc.$type.size}> Kb
+              </td>
+            </tr>
+            <{/if}>
+           <{/foreach}>
+         </table>
+       </td>
+     </tr>
+    <{/foreach}>
+  </table>
+</div>

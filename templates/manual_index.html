@@ -1,0 +1,17 @@
+<{$langbar}>
+<{$content}>
+<div class="comments">
+  <{$commentbar}>
+  <{foreach key=index item=comment from=$comments}>
+    <div class="sc">
+      Title: <span class="title"><{$comment.title}> </span> <br>
+      From: <span class="name"><{$comment.name}><span> // <span class="date"><{$comment.date}></span><br>
+      <{if $comment.id}>
+        Reference: <span class="id"><a href="#<{$comment.id}>"><{$comment.idtext}></a></span> <br>
+      <{/if}>
+      <div class="ct">
+        <{$comment.text}>
+      </div>
+    </div>
+  <{/foreach}>
+</div>
